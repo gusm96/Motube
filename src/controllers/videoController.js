@@ -1,5 +1,5 @@
 export const getSee = (req, res) => {
-  res.send("Watch Videos");
+  res.render("watch", { pageName: "Videos" });
 };
 export const getupload = (req, res) => {
   res.send("upload videos");

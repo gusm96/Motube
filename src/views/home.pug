@@ -1,0 +1,9 @@
+extends layout.pug
+include mixins/mixin
+
+block content 
+    h3 Home page!!!
+    each videoInfo in videos 
+        +video(videoInfo)
+    else 
+        li 동영상을 찾지 못했어요.
