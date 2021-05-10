@@ -1,3 +1,9 @@
+export const getJoin = (req, res) => {
+  res.render("join", { pageName: "Join" });
+};
+export const getLogin = (req, res) => {
+  res.render("login", { pageName: "Login" });
+};
 export const getProfile = (req, res) => {
   res.send("User Profile");
 };

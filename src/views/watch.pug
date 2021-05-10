@@ -1,4 +1,6 @@
 extends layout.pug
 
 block content 
-    h1 Watch your Videos!
+    h3 #{video.views} #{video.views === 1 ? "view" : "views"}
+    h4 
+        a(href=`${video.id}/edit`) Edit Video
