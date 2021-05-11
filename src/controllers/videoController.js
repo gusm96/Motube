@@ -1,45 +1,25 @@
-let videos = [
-  {
-    title: "First Video",
-    rating: 5,
-    comments: 2,
-    createdAt: "5 minutes ago",
-    views: 902,
-    id: 1,
-  },
-  {
-    title: "Second Video",
-    rating: 5,
-    comments: 2,
-    createdAt: "5 minutes ago",
-    views: 92,
-    id: 2,
-  },
-  {
-    title: "Third Video",
-    rating: 5,
-    comments: 2,
-    createdAt: "5 minutes ago",
-    views: 92,
-    id: 3,
-  },
-];
+import video from "../models/Video";
+
 export const getHome = (req, res) => {
-  return res.render("home", { pageName: "Home", videos });
+  return res.render("home", { pageName: "Home" });
 };
 export const getWatch = (req, res) => {
   const { id } = req.params;
-  const video = videos[id - 1];
-  return res.render("watch", { pageName: `Watching ${video.title}`, video });
+  return res.render("watch", { pageName: "Watching" });
 };
 export const getEditVideo = (req, res) => {
   const { id } = req.params;
-  const video = videos[id - 1];
-  return res.render("edit", { pageName: `Editing ${video.title}`, video });
+  return res.render("edit", { pageName: "Editing" });
 };
 export const postEditVideo = (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
-  videos[id - 1].title = title;
   return res.redirect(`/video/${id}`);
+};
+export const getUpload = (req, res) => {
+  return res.render("upload", { pageName: "Upload Vidoe" });
+};
+export const postUpload = (req, res) => {
+  const { title } = req.body;
+  return res.redirect("/");
 };

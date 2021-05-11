@@ -2,6 +2,8 @@ extends layout.pug
 include mixins/mixin
 
 block content 
+    header 
+            a(href="/video/upload") Upload
     h3 Home page!!!
     each videoInfo in videos 
         +video(videoInfo)
