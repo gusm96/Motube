@@ -1,6 +1,11 @@
 extends layout.pug
+include mixins/mixin
 
-block content 
-    h3 #{video.views} #{video.views === 1 ? "view" : "views"}
-    h4 
-        a(href=`${video.id}/edit`) Edit Video
+block content
+    div
+        p=video.description
+        small=video.createdAt
+        small=video.hashtags
+    div
+        a(href=`${video.id}/edit`) Edit Video &rarr;
+            

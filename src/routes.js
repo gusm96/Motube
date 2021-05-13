@@ -5,7 +5,7 @@ const LOGIN = "/login";
 const SEARCH = "/search";
 
 //Users Router
-const PROFILE_USER = "/:id(\\d+)";
+const PROFILE_USER = "/:id([0-9a-f]{24})";
 const EDIT_USER = "/edit";
 const DELETE_USER = "/delete";
 const LOGOUT = "/logout";
@@ -13,9 +13,9 @@ const LOGOUT = "/logout";
 
 //Videos Router
 const UPLOAD_VIDEO = "/upload";
-const WATCH_VIDEO = "/:id(\\d+)";
-const EDIT_VIDEO = "/:id(\\d+)/edit";
-const DELETE_VIDEO = "/:id(\\d+)/delete";
+const WATCH_VIDEO = "/:id([0-9a-f]{24})";
+const EDIT_VIDEO = "/:id([0-9a-f]{24})/edit";
+const DELETE_VIDEO = "/:id([0-9a-f]{24})/delete";
 const COMMENT = "/comment";
 const DELETE_COMMENT = "/comment/delete";
 
