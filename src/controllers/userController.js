@@ -1,5 +1,32 @@
+import User from "../models/User";
+
 export const getJoin = (req, res) => {
-  res.render("join", { pageName: "Join" });
+  return res.render("join", { pageName: "Join" });
+};
+export const postJoin = async (req, res) => {
+  const pageName = "Join";
+  const { name, username, password, password2, email, location } = req.body;
+  const exists = await User.exists({ $or: [{ username }, { email }] });
+  if (password !== password2) {
+    return res.render("join", {
+      pageName,
+      errorMessage: "Password Confrimation does not match",
+    });
+  }
+  if (exists) {
+    return res.render("join", {
+      pageName,
+      errorMessage: "This username/email is already taken!",
+    });
+  }
+  await User.create({
+    name,
+    username,
+    password,
+    email,
+    location,
+  });
+  return res.redirect("/login");
 };
 export const getLogin = (req, res) => {
   res.render("login", { pageName: "Login" });
