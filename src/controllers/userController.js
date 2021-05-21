@@ -8,29 +8,51 @@ export const postJoin = async (req, res) => {
   const { name, username, password, password2, email, location } = req.body;
   const exists = await User.exists({ $or: [{ username }, { email }] });
   if (password !== password2) {
-    return res.render("join", {
+    return res.status(400).render("join", {
       pageName,
       errorMessage: "Password Confrimation does not match",
     });
   }
   if (exists) {
-    return res.render("join", {
+    return res.status(400).render("join", {
       pageName,
       errorMessage: "This username/email is already taken!",
     });
   }
-  await User.create({
-    name,
-    username,
-    password,
-    email,
-    location,
-  });
-  return res.redirect("/login");
+  try {
+    await User.create({
+      name,
+      username,
+      password,
+      email,
+      location,
+    });
+    return res.redirect("/login");
+  } catch (error) {
+    return res.status(400).render("join", {
+      pageName,
+      errorMessage: error._message,
+    });
+  }
 };
 export const getLogin = (req, res) => {
   res.render("login", { pageName: "Login" });
 };
+
+export const postLogin = async (req, res) => {
+  const { username, password } = req.body;
+  const exists = await User.exists({ username });
+  if (!exists) {
+    return res
+      .status(400)
+      .render("login", {
+        pageName: "Login",
+        errorMessage: "An account with this username does not exists.",
+      });
+  }
+  return res.redirect("/");
+};
+
 export const getProfile = (req, res) => {
   res.send("User Profile");
 };
