@@ -14,7 +14,7 @@ const LOGOUT = "/logout";
 //Videos Router
 const UPLOAD_VIDEO = "/upload";
 const WATCH_VIDEO = "/:id([0-9a-f]{24})";
-const EDIT_VIDEO = "/:id([0-9a-f]{24})/edit";
+const EDIT_VIDEO = "/edit";
 const DELETE_VIDEO = "/:id([0-9a-f]{24})/delete";
 const COMMENT = "/comment";
 const DELETE_COMMENT = "/comment/delete";
