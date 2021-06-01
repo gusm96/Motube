@@ -8,6 +8,8 @@ import {
   getProfile,
   startGithubLogin,
   finishGithubLogin,
+  getChangePassword,
+  postChangePassword,
 } from "../controllers/userController";
 import { protectorMiddleware, publicOnlyMiddleware } from "../middlewares";
 
@@ -20,8 +22,13 @@ userRouter
   .all(protectorMiddleware)
   .get(getEditProfile)
   .post(postEditProfile);
+userRouter
+  .route(routes.changePassword)
+  .all(protectorMiddleware)
+  .get(getChangePassword)
+  .post(postChangePassword);
 userRouter.get(routes.deleteUser, getDelUser);
-userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
-userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
+userRouter.get(routes.githubStart, publicOnlyMiddleware, startGithubLogin);
+userRouter.get(routes.githubFinish, publicOnlyMiddleware, finishGithubLogin);
 
 export default userRouter;

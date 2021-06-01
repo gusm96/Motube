@@ -141,8 +141,45 @@ export const getProfile = (req, res) => {
 export const getEditProfile = (req, res) => {
   res.render("edit-profile", { pageName: "Edit Profile" });
 };
-export const postEditProfile = (req, res) => {
-  res.render("edit-profile");
+export const postEditProfile = async (req, res) => {
+  const {
+    body: { name, email, username, location },
+    session: {
+      user: { _id },
+    },
+  } = req;
+
+  const findUsername = await User.findOne({ username });
+  const findEmail = await User.find;
+
+  if (findUsername._id != _id) {
+    return res.render("editProfile", {
+      pageTitle: "Edit  Profile",
+      errorMessage: "User is exist",
+    });
+  }
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/user/edit");
+};
+
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("change-password", { pageName: "Change Password" });
+};
+export const postChangePassword = (req, res) => {
+  return res.render("change-password", { pageName: "Change Password" });
 };
 export const getDelUser = (req, res) => {
   res.send("delete users profile");
