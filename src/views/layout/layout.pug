@@ -14,9 +14,10 @@ html(lang="ko")
                         li 
                             a(href="/video/upload") Upload Video
                         li
-                            a(href="/user/logout") Logout 
+                            a(href=`/user/${loggedInUser._id}`) #{loggedInUser.name}의 Profile
                         li
-                            a(href="/user/edit") Edit Profile
+                            a(href="/user/logout") Logout 
+                        
                     else 
                         li 
                             a(href="/join") Join
@@ -27,4 +28,4 @@ html(lang="ko")
                      
         main
             block content  
-    include partials/footer
+    include ../partials/footer

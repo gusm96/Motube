@@ -1,0 +1,10 @@
+extends ../layout/layout
+include ../mixins/mixin
+
+block content 
+    each videoInfo in user.videos 
+        +video(videoInfo)
+    else 
+        li 동영상을 찾지 못했어요.
+    if loggedIn
+        a(href="/user/edit") Edit Profile &rarr;
