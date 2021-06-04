@@ -8,13 +8,14 @@ export const getJoin = (req, res) => {
 export const postJoin = async (req, res) => {
   const pageName = "Join";
   const { name, username, password, password2, email, location } = req.body;
-  const exists = await User.exists({ $or: [{ username }, { email }] });
+  console.log(req.body);
   if (password !== password2) {
     return res.status(400).render("global/join", {
       pageName,
       errorMessage: "Password Confrimation does not match",
     });
   }
+  const exists = await User.exists({ $or: [{ username }, { email }] });
   if (exists) {
     return res.status(400).render("global/join", {
       pageName,
