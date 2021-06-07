@@ -2,19 +2,27 @@ extends ../layout/layout
 include ../mixins/mixin
 
 block content
-    div
-        video(src="/"+ video.fileUrl, controls, width="600", height="400") 
-        p=video.description
-        small=video.createdAt
-        br
-        small Upload by 
-            a(href=`/user/${video.owner._id}`)=video.owner.name
-        ul 
-        each hashtags in video.hashtags
-            li=hashtags
-        if String(video.owner._id) === String(loggedInUser._id)
-            div
-                a(href=`${video.id}/edit`) Edit Video &rarr;
-                br
-                a(href=`${video.id}/delete`) Delete Video &rarr;
-            
+    video(src="/"+ video.fileUrl, controls") 
+    div 
+        button#play Play
+        button#mute Mute
+        span#time 00:00/00:00
+        input(type="range", min="0", max="1")
+//-
+    p=video.description 
+    small=video.createdAt
+    br
+    small Upload by 
+        a(href=`/user/${video.owner._id}`)=video.owner.name
+    ul 
+    each hashtags in video.hashtags
+        li=hashtags
+    if String(video.owner._id) === String(loggedInUser._id)
+        div
+            a(href=`${video.id}/edit`) Edit Video &rarr;
+            br
+            a(href=`${video.id}/delete`) Delete Video &rarr;
+
+
+block scripts 
+    script(src="/assets/js/videoPlayer.js") 

@@ -2,7 +2,8 @@ extends ../layout/layout
 include ../mixins/mixin
 
 block content 
-    each videoInfo in videos 
-        +video(videoInfo)
-    else 
-        li 동영상을 찾지 못했어요.
+     div.video-grid
+        each video in videos
+            +video(video)
+        else
+            span.empty__message No videos found 

@@ -2,32 +2,12 @@ doctype html
 html(lang="ko")
     head 
         title Motube | #{pageName}
-        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
         link(rel="stylesheet", href="/assets/css/style.css")
     body 
-        header 
-            h1=pageName
-            nav 
-                ul
-                    li 
-                        a(href="/") Home
-                    if loggedIn
-                        li 
-                            a(href="/video/upload") Upload Video
-                        li
-                            a(href=`/user/${loggedInUser._id}`) #{loggedInUser.name}의 Profile
-                        li
-                            a(href="/user/logout") Logout 
-                        
-                    else 
-                        li 
-                            a(href="/join") Join
-                        li 
-                            a(href="/login") Login     
-                    li 
-                        a(href="/search") Search    
-                     
+        include ../partials/header
         main
             block content  
-    include ../partials/footer
-    script(src="/assets/js/main.js")  
+        include ../partials/footer
+    block scripts
+          

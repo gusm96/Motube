@@ -2,9 +2,11 @@ extends ../layout/layout
 include ../mixins/mixin
 
 block content 
-    each videoInfo in user.videos 
-        +video(videoInfo)
-    else 
-        li 동영상을 찾지 못했어요.
-    if loggedIn
-        a(href="/user/edit") Edit Profile &rarr;
+    div.profile__data
+        img(src="/" + user.avatarUrl).avatar
+        h3=user.name
+    div.video-grid
+        each video in user.videos
+            +video(video)
+        else
+            span.empty__message No videos found 
