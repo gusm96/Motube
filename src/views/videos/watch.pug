@@ -1,13 +1,21 @@
 extends ../layout/layout 
-include ../mixins/mixin
 
 block content
-    video(src="/"+ video.fileUrl, controls") 
-    div 
-        button#play Play
-        button#mute Mute
-        span#time 00:00/00:00
-        input(type="range", min="0", max="1")
+    div#videoContainer
+        video(src="/" + video.fileUrl)
+        div#videoContorller
+            button#play Play
+            button#mute Mute
+            span#time 00:00/00:00
+            input(type="range", value=0.5,  min="0", max="1", step=0.1)#volume
+            div 
+                span#currentTime 00:00
+                span  / 
+                span#totalTime 00:00
+            div 
+                input(type="range", value=0,  min="0", step=1)#timeLine
+            div
+                button#fullScreen Enter Full Screen
 //-
     p=video.description 
     small=video.createdAt
@@ -24,5 +32,5 @@ block content
             a(href=`${video.id}/delete`) Delete Video &rarr;
 
 
-block scripts 
-    script(src="/assets/js/videoPlayer.js") 
+block scripts
+    script(src="/assets/js/videoPlayer.js")
