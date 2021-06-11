@@ -1,11 +1,16 @@
 header {
-  padding: 20px 50px;
+  background-color: $headerBG;
+  padding: 10px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   .header__logo {
     color: $red;
     font-size: 38px;
+  }
+  .header__logo_text {
+    font-size: x-large;
+    color: white;
   }
   ul {
     display: flex;

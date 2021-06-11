@@ -10,7 +10,7 @@ block content
         input(type="text", placeholder="User Name", name="username", required, value=loggedInUser.username)
         input(type="email", placeholder="E-mail", name="email", required, value=loggedInUser.email)
         input(type="text", placeholder="Location", name="location", value=loggedInUser.location)
-        input(type="submit" value="Update Profile")
+        input.submitBtn(type="submit" value="Update Profile")
         if !loggedInUser.socialOnly
              div.edit-profile__password
                 a(href="change-password") Change Password &rarr; 

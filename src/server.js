@@ -17,7 +17,6 @@ app.use("/uploads", express.static("uploads"));
 app.use("/assets", express.static("assets"));
 app.use(morganMiddleware);
 app.use(express.urlencoded({ extended: true }));
-
 app.use(
   sesstion({
     secret: process.env.COOKIE_SECRET,

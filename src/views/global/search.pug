@@ -2,10 +2,6 @@ extends ../layout/layout
 include ../mixins/mixin
 
 block content
-    form(method="GET").search__form 
-        input(type="text", placeholder="Search by title", name="keyword", required)
-        button
-            i.fas.fa-search
     div.video-grid
         each video in videos 
             +video(video)
