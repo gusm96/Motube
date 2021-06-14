@@ -1,17 +1,20 @@
 extends ../layout/layout 
 
 block content 
-    if errorMessage 
-    span=errorMessage
-    div
-        video#preview
-        button#startBtn Recording
-    form(method="POST", enctype="multipart/form-data") 
-        label(for="video") Video File 
-        input(type="file", id="video", name="video", accept="video/*",required) 
-        input(type="text", name="title", placeholder="Title", required)
-        input(type="text", name="description", placeholder="Description", required)
-        input(type="text", name="hashtags", placeholder="Hashtags", required)
-        input.submitBtn(type="submit" value="Submit")
+    div.upload__container
+        div.upload__video
+            video#preview
+            button#actionBtn.social__btn Recording
+        if errorMessage 
+            span=errorMessage
+        form(method="POST", enctype="multipart/form-data") 
+            label(for="video") Video File 
+            input(type="file", id="video", name="video", accept="video/*",required) 
+            label(for="thumb") Thumbnail File 
+            input(type="file", id="thumb", name="thumb", accept="image/*",required)
+            input(type="text", name="title", placeholder="Title", required)
+            input(type="text", name="description", placeholder="Description", required)
+            input(type="text", name="hashtags", placeholder="Hashtags", required)
+            input.submitBtn(type="submit" value="Submit")
 block scripts 
     script(src="/assets/js/recorder.js") 

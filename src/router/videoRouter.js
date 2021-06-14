@@ -22,7 +22,7 @@ videoRouter
   .route(routes.uploadVideo)
   .all(protectorMiddleware)
   .get(getUpload)
-  .post(videoFiles.single("video"), postUpload);
+  .post(videoFiles.fields([{ name: "video" }, { name: "thumb" }]), postUpload);
 videoRouter.all(protectorMiddleware).get(routes.deleteVideo, delVideo);
 
 export default videoRouter;
