@@ -7,6 +7,7 @@ import userRouter from "./router/userRouter";
 import videoRouter from "./router/videoRouter";
 import { localsMiddleware } from "./middlewares";
 import apiRouter from "./router/apiRouter";
+import flash from "express-flash";
 
 const app = express();
 const morganMiddleware = morgan("dev");
@@ -25,6 +26,7 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
+app.use(flash());
 
 app.use(localsMiddleware);
 app.use("/", rootRouter);

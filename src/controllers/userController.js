@@ -166,6 +166,7 @@ export const postEditProfile = async (req, res) => {
 
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly === true) {
+    req.flash("error", "Can't change password.");
     return res.redirect("/");
   }
   return res.render("users/change-password", { pageName: "Change Password" });
@@ -194,6 +195,7 @@ export const postChangePassword = async (req, res) => {
 
   user.password = newPassword;
   await user.save();
+  req.flash("info", "Password updated");
   return res.redirect("/user/logout");
 };
 
@@ -218,6 +220,7 @@ export const getDelUser = (req, res) => {
   res.send("delete users profile");
 };
 export const getLogout = (req, res) => {
+  req.flash("info", "Bye Bye");
   req.session.destroy();
   return res.redirect("/");
 };
