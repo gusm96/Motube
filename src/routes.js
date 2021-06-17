@@ -19,11 +19,12 @@ const UPLOAD_VIDEO = "/upload";
 const WATCH_VIDEO = "/:id([0-9a-f]{24})";
 const EDIT_VIDEO = "/:id([0-9a-f]{24})/edit";
 const DELETE_VIDEO = "/:id([0-9a-f]{24})/delete";
-const COMMENT = "/comment";
 const DELETE_COMMENT = "/comment/delete";
 
 // API Router
 const VIEWS = "/video/:id([0-9a-f]{24})/views";
+const COMMENT = "/video/:id([0-9a-f]{24})/comment";
+const DELETECM = "/video/:id([0-9a-f]{24})/comment/delete";
 const routes = {
   // global
   home: HOME,
@@ -47,6 +48,8 @@ const routes = {
   deleteComment: DELETE_COMMENT,
   // api
   views: VIEWS,
+  comments: COMMENT,
+  deleteCm: DELETECM,
 };
 
 export default routes;

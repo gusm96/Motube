@@ -1,3 +1,5 @@
+import { async } from "regenerator-runtime";
+import Comment from "../models/Comment";
 import User from "../models/User";
 import Video from "../models/Video";
 
@@ -9,8 +11,7 @@ export const getHome = async (req, res) => {
 };
 export const getWatch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
-
+  const video = await Video.findById(id).populate("owner").populate("comments");
   if (!video) {
     return res.render("global/404", { pageName: "Video not found" });
   } else {
@@ -131,3 +132,39 @@ export const registerView = async (req, res) => {
   await video.save();
   return res.sendStatus(200);
 };
+
+export const createComment = async (req, res) => {
+  const {
+    session: { user },
+    params: { id },
+    body: { text },
+  } = req;
+  const users = await User.findById(user._id);
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+  video.comments.push(comment._id);
+  await video.save();
+  users.comments.push(comment._id);
+  await users.save();
+  return res.sendStatus(201);
+};
+
+//export const deleteComment = async (req, res) => {
+//  const { id } = req.params;
+//  const {
+//    user: { _id },
+//  } = req.session;
+//  console.log("Delete", id);
+//  console.log("User ID:", _id);
+//  const user = await User.findById(_id);
+//  const video = await Video.findById(id);
+//  console.log("User:", user);
+//  console.log("Video:", video);
+//};
