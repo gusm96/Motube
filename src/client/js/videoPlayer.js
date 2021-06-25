@@ -4,7 +4,7 @@ const playBtnIcon = playBtn.querySelector("i");
 const muteBtn = document.getElementById("mute");
 const muteBtnIcon = muteBtn.querySelector("i");
 const volumeRange = document.getElementById("volume");
-const currenTime = document.getElementById("currenTime");
+const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreen");
@@ -58,7 +58,7 @@ const handleLoadedMetadata = () => {
   timeline.max = Math.floor(video.duration);
 };
 const handleTimeUpdate = () => {
-  currenTime.innerText = formatTime(Math.floor(video.currentTime));
+  currentTime.innerText = formatTime(Math.floor(video.currentTime));
   timeline.value = Math.floor(video.currentTime);
 };
 const handleTimelineChange = (event) => {
