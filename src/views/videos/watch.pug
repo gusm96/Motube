@@ -20,11 +20,11 @@ block content
                 span#fullScreen
                     i.fas.fa-expand
     hr       
-    div 
+    div.video__edit-container 
         if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Video &rarr;
+            a#video__edit-link(href=`${video.id}/edit`) Edit Video &rarr;
             br
-            a(href=`${video.id}/delete`) Delete Video &rarr;
+            a#video__edit-link(href=`${video.id}/delete`) Delete Video &rarr;
 
     //-div.video__data
         p.video__title=video.title
@@ -33,13 +33,12 @@ block content
         small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
         if String(video.owner._id) === String(loggedInUser._id)
             a(href=`${video.id}/edit`) Edit Video &rarr;
-            br
             a(href=`${video.id}/delete`) Delete Video &rarr;
     if loggedIn
         div.video__add-comments
             form.video__comment-form#commentForm
-                textarea(cols="30", rows="10", placeholder="Write a nice commment...")
-                button Add Comment
+                textarea.video__comment-textarea(cols="30", rows="10", placeholder="Write a nice commment...")
+                button.video__comment-addBtn Add Comment
     div.video__comments
         ul
             each comment in video.comments.reverse()
@@ -47,7 +46,7 @@ block content
                     i.fas.fa-comment
                     span  #{comment.text}
                     if String(comment.owner) === String(loggedInUser._id)
-                        button#commentDelete ❌
+                        button.video__comment-deleteBtn#commentDelete ❌
 block scripts
     script(src="/assets/js/videoPlayer.js")
     if loggedIn

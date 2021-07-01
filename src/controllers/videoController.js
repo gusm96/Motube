@@ -1,4 +1,5 @@
 import { async } from "regenerator-runtime";
+import { ids } from "webpack";
 import Comment from "../models/Comment";
 import User from "../models/User";
 import Video from "../models/Video";
@@ -153,18 +154,28 @@ export const createComment = async (req, res) => {
   await video.save();
   users.comments.push(comment._id);
   await users.save();
-  return res.sendStatus(201);
+  return res.status(201).json({ newCommentId: comment._id });
 };
 
 export const deleteComment = async (req, res) => {
   const { id } = req.params;
-  const {
-    user: { _id },
-  } = req.session;
-  //console.log("Delete", id);
-  //console.log("User ID:", _id);
-  const user = await User.findById(_id);
-  const video = await Video.findById(id);
-  //console.log("User:", user);
-  //console.log("Video:", video);
+  const { user } = req.session;
+  const comment = await Comment.findById(id);
+  const videoId = comment.video;
+  const video = await Video.findById(videoId);
+  const currentUser = await User.findById(user._id);
+  if (!comment) {
+    return res.sendStatus(404);
+  } else {
+    if (String(user._id) !== String(comment.owner)) {
+      return res.sendStatus(400);
+    } else {
+      video.comments.remove(id);
+      video.save();
+      currentUser.comments.remove(id);
+      currentUser.save();
+      await Comment.findByIdAndDelete(id);
+      return res.sendStatus(200);
+    }
+  }
 };
