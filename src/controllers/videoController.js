@@ -1,5 +1,3 @@
-import { async } from "regenerator-runtime";
-import { ids } from "webpack";
 import Comment from "../models/Comment";
 import User from "../models/User";
 import Video from "../models/Video";
