@@ -8,7 +8,6 @@ export const getJoin = (req, res) => {
 export const postJoin = async (req, res) => {
   const pageName = "Join";
   const { name, username, password, password2, email, location } = req.body;
-  console.log(req.body);
   if (password !== password2) {
     return res.status(400).render("global/join", {
       pageName,
@@ -152,7 +151,7 @@ export const postEditProfile = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? file.path : avatarUrl,
+      avatarUrl: file ? file.location : avatarUrl,
       name,
       email,
       username,
