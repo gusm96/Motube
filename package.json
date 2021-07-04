@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Make a Motube",
   "scripts": {
-    "start": "node bulid/init.js",
+    "start": "node build/init.js",
     "build": "npm run build:server && npm run build:assets",
     "build:server": "babel src -d build",
     "build:assets": "webpack --mode=production",
